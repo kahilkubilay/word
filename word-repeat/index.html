@@ -1,42 +1,11 @@
-<!doctype html>
-<html>
-<head>
-    <title>Word Repeat</title>
-
-    <meta charset="utf-8" />
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style type="text/css">
-        @import'css/main.css';
-        @import'node_modules/bootstrap/dist/css/bootstrap.min.css';
-    </style>  
-</head>
-
-<body>
-
-    <div class="area-container d-flex justify-content-center">
-        <div class="element-container">
-            <div class="d-flex justify-content-center word-area" >
-                <p id="englishWord" class="pr-3 pl-3 englishWord"></p>
-            </div>
-
-            <div class="input-area mt-4 ">
-                <input class="form-control turkishWord" type="text" placeholder="">
-            </div>
-
-            <div class="oval-progress mt-5">
-                <svg class="progress-circle" width="200px" height="200px" >
-                    <circle class="progress-circle-back" cx="80" cy="80" r="40"></circle>
-                    <circle class="progress-circle-prog" cx="80" cy="80" r="40"></circle>
-                </svg>
-                  <div class="progress-img">
-                      <img class="align-text-bottom" src="img/start-flag.png">
-                  </div>
-            </div>              
-            
-        </div>
-    </div>
-
-    <script src="js/main.js" type="text/javascript"></script>
-</body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Word Speech</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="/dist/build.js"></script>
+  </body>
 </html>
