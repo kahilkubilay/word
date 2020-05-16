@@ -3,17 +3,21 @@
     <div class="welcome" v-show="welcomeContainer">
       <h2 class="msg">Word Speech</h2>
 
-      <p class="countWord" v-bind="counterEffect()">{{ countWord }} </p>
-      <p class="msg">Words</p>
+      <p class="countWord msg" v-bind="counterEffect()">
+        <span>{{ countWord }}</span>
+        <span>Words</span>
+      </p>
 
       <button @click="gameArea()">Start</button>
 
       <div class="badge">
 
-        <p class="badgeHeader">27 Badge</p>
+        <p class="badgeHeader">10 Badge</p>
 
         <ul>
-          <li v-for="option in options"><img src="src/assets/basic.png" alt=""></li>
+          <li v-for="badgeIcon in badge" v-bind:key="badgeIcon">
+            <img :src="getImagePath(badgeIcon)" :alt="badgeIcon + ' icon'">
+          </li>
         </ul>
       </div>
     </div>
@@ -25,11 +29,31 @@
         </div>
       </div>
 
+      <div class="circle-wrap">
+        <div class="circle">
+
+          <div class="mask full">
+            <div class="fill"></div>
+          </div>
+
+          <div class="mask half">
+            <div class="fill"></div>
+          </div>
+
+          <div class="inside-circle">
+            <img src="../src/assets/iconPackage/colored/drums-colored.png" alt="">
+          </div>
+
+        </div>
+      </div>
+
+      <!---->
+
+
       <p class="word"> {{ word }} </p>
 
       <input type="text" v-model="answer">
 
-      <p>{{ log }}</p>
     </div>
 
     <menubar v-show="!welcomeContainer" v-on:getChangeCategories="changeCategory"></menubar>
@@ -67,11 +91,13 @@
     },
     data() {
       return {
-        welcomeContainer: true,
+        welcomeContainer: false,
         active: false,
         countWord: 0,
         options: ['option1', 'option2', 'option3', 'option4', 'option5', 'option6', 'option7', 'option8', 'option9'],
-        badge: [],
+        badge: ['analyze', 'apple', 'billpaid', 'cube', 'diving', 'drums', 'education', 'spaceship',
+          'statsincrease', 'tamburine'
+        ],
         word: '',
         answer: '',
         wordCounter: 0,
@@ -79,24 +105,23 @@
         wordList: wordList,
         log: '',
         msg: '',
+        lengthOfWords: 0,
       }
     },
     methods: {
       counterEffect() {
+        var totalWord = this.getLengthOfWords();
         var vm = this;
+
         setTimeout(function () {
-          vm.countWord < 2023230 ? vm.countWord++ : false;
+          vm.countWord < totalWord ? vm.countWord++ : false;
         }, 100);
-      },
-      addClass(event) {
-        event.target.className += ' active';
       },
       gameArea() {
         this.welcomeContainer = false;
         this.word = this.words[this.wordCounter];
 
         this.startGame();
-
       },
       startGame() {
         var vm = this;
@@ -105,6 +130,12 @@
 
           if (vm.answer === vm.words[vm.wordCounter + 1]) {
             vm.wordCounter += 2;
+
+            // document.querySelector(){
+
+            // }
+
+
 
             vm.word = vm.words[vm.wordCounter];
             vm.answer = '';
@@ -116,25 +147,41 @@
       changeCategory(categoryName) {
         this.words = wordList[categoryName];
         this.word = this.words[0];
-      }
+      },
+      getImagePath(iconPath) {
+        return ('../src/assets/iconPackage/colored/' + iconPath + '-colored.png');
+      },
+      getLengthOfWords() {
+        var toArrayWordList = Object.values(wordList);
+        var countWord = 0;
+
+        toArrayWordList.forEach(function (wordListCategory) {
+          wordListCategory.forEach(function () {
+            countWord++;
+          });
+        });
+
+        return countWord;
+
+      },
     }
   }
 
 </script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Niramit&display=swap');
 
   * {
     margin: 0;
     padding: 0;
-    font-family: 'Work Sans', sans-serif;
-    color: #3a4750;
+    font-family: 'Niramit', sans-serif;
+    color: #00005c;
     list-style-type: none;
   }
 
-  body {
-    background-color: #fcf9f9;
+  html body {
+    background-color: #ecfeff;
   }
 
   #app {
@@ -145,74 +192,76 @@
   .welcome {
     width: 100%;
     height: auto;
-    margin-top: 10%;
+    margin-top: 7%;
     text-align: center;
   }
 
   .msg {
+    width: 45%;
+    margin: auto;
     font-size: 300%;
-    text-decoration: underline;
+    display: block;
+    text-decoration: none;
     margin-bottom: 1%;
   }
 
   .countWord {
     font-weight: bold;
-    font-size: 125%;
+    font-size: 200%;
     left: 49%;
-  }
-
-  .countWord,
-  .countWord span {
-    position: absolute;
-  }
-
-  p.msg {
-    margin-left: 5%;
-    font-size: 125%;
-    font-weight: bold;
-    text-decoration: none;
+    width: 20%;
   }
 
   button {
-    border: none;
-    padding: 15px 32px;
+    padding: 15px 50px;
     text-align: center;
-    display: inline-block;
-    font-size: 125%;
+    font-size: 175%;
+    font-weight: bold;
+    border: none;
+    background-color: #d9bf77;
     border-radius: 5px;
+    margin: 3% auto;
+    cursor: pointer;
   }
 
+  button:active {
+    border: 2px solid #2b580c;
+  }
+
+  /*badge area*/
   .badge {
     width: 100%;
-    position: absolute;
-    top: 60%;
-    left: 0%;
-    margin: auto auto;
+    margin: 4% auto;
   }
 
   .badge .badgeHeader {
-    font-size: 150%;
+    font-size: 200%;
     font-weight: bold;
   }
 
   .badge ul {
-    margin-left: 30%;
+    width: 50%;
+    display: flex;
+    flex-flow: row wrap;
+    margin: 1% auto;
   }
 
   .badge ul li {
     width: 75px;
     height: 75px;
-    background-color: #aacfcf;
-    border: 2px solid #679b9b;
-    border-radius: 100px;
-    float: left;
-    margin: 1%;
+    padding: 0.3%;
+    ;
+    margin: 1% 1%;
+    background-color: #d8ebb5;
+    border-radius: 50%;
   }
 
   .badge ul li img {
     margin-top: 15%;
     width: 50px;
   }
+
+  /*badge area*/
 
   /*welcome area*/
 
@@ -225,22 +274,86 @@
   }
 
   #mainContainer p {
-    font-size: 125%;
+    font-size: 150%;
     font-weight: bold;
-    margin-bottom: 1.5%;
+    margin-bottom: 1%;
   }
 
   #mainContainer input {
     width: 13%;
     border: 2px solid #679b9b;
     border-radius: 15px;
-    background-color: #aacfcf;
     font-weight: bold;
     font-size: 125%;
     padding: 0.5%;
     text-align: center;
     outline: none;
   }
+
+  /*circle-wrap */
+  .circle-wrap {
+    margin: 50px auto;
+    width: 150px;
+    height: 150px;
+    background: #e6e2e7;
+    border-radius: 50%;
+  }
+
+  .circle-wrap .circle .mask,
+  .circle-wrap .circle .fill {
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  .circle-wrap .circle .mask {
+    clip: rect(0px, 150px, 150px, 75px);
+  }
+
+  .circle-wrap .circle .mask .fill {
+    clip: rect(0px, 75px, 150px, 0px);
+    background-color: #639a67;
+  }
+
+  .circle-wrap .circle .mask.full,
+  .circle-wrap .circle .fill {
+    animation: fill ease-in-out 3s;
+    transform: rotate(130deg);
+  }
+
+  /* @keyframes fill {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(0deg);
+    }
+  } */
+
+  .circle-wrap .inside-circle {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background-color: #cceabb;
+    line-height: 130px;
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 10px;
+    position: absolute;
+    z-index: 100;
+    font-weight: 700;
+    font-size: 2em;
+  }
+
+  .circle-wrap .inside-circle img {
+    width: 50%;
+    margin-top: 23%;
+  }
+
+
+  /*circle-wrap */
 
   /*main container */
 
