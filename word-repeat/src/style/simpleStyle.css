@@ -1,0 +1,157 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Niramit', sans-serif;
+    color: #00005c;
+    list-style-type: none;
+  }
+
+  html body {
+    background-color: #ecfeff;
+  }
+
+  #app {
+    width: 100%;
+  }
+
+  /*welcome area*/
+  .welcome {
+    width: 100%;
+    height: auto;
+    margin-top: 7%;
+    text-align: center;
+  }
+
+  .msg {
+    width: 45%;
+    margin: auto;
+    font-size: 300%;
+    display: block;
+    text-decoration: none;
+    margin-bottom: 1%;
+  }
+
+  .countWord {
+    font-weight: bold;
+    font-size: 200%;
+    left: 49%;
+    width: 20%;
+  }
+
+  button {
+    padding: 15px 50px;
+    text-align: center;
+    font-size: 175%;
+    font-weight: bold;
+    border: none;
+    background-color: #d9bf77;
+    border-radius: 5px;
+    margin: 3% auto;
+    cursor: pointer;
+  }
+
+  button:active {
+    border: 2px solid #2b580c;
+  }
+
+  /*badge area*/
+  .badge {
+    width: 100%;
+    margin: 4% auto;
+  }
+
+  .badge .badgeHeader {
+    font-size: 200%;
+    font-weight: bold;
+  }
+
+  .badge ul {
+    width: 50%;
+    display: flex;
+    flex-flow: row wrap;
+    margin: 1% auto;
+  }
+
+  .badge ul li {
+    width: 75px;
+    height: 75px;
+    padding: 0.3%;
+    margin: 1% 1%;
+    background-color: #d8ebb5;
+    border-radius: 50%;
+  }
+
+  .badge ul li img {
+    margin-top: 15%;
+    width: 50px;
+  }
+
+  /*badge area*/
+
+  /*welcome area*/
+
+  /*main container */
+  #mainContainer {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    margin-top: 2%;
+  }
+
+  #mainContainer p {
+    font-size: 150%;
+    font-weight: bold;
+    margin-bottom: 1%;
+    position: relative;
+  }
+
+  #mainContainer input {
+    width: 13%;
+    border: 2px solid #679b9b;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 125%;
+    padding: 0.5%;
+    text-align: center;
+    outline: none;
+  }
+
+  #mainContainer p,  #mainContainer input{
+    position: relative;
+    top: -55px;
+  }
+
+  /*progress bar*/
+  .oval-progress {
+    margin-left: 1%;
+  }
+
+  .progress-circle {
+    transform: rotate(-90deg);
+  }
+
+  .progress-circle-back {
+    fill: none;
+    stroke: #cceabb;
+    stroke-width: 10px;
+  }
+
+  .progress-circle-prog {
+    fill: none;
+    stroke: #00005c;
+    stroke-width: 3px;
+    stroke-dasharray: 0 999;
+    stroke-dashoffset: 0px;
+    transition: stroke-dasharray 0.7s linear 0s;
+  }
+
+  .progress-img img{
+    width: 50px;
+    position: relative;
+    top: -110px;
+    left: -20px;
+  }
+
+  /*circle-wrap */
+
+  /*main container */

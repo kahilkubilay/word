@@ -18,7 +18,7 @@
     },
     data() {
       return {
-        listWords: ['Technologies', 'Sport', 'Nature', 'Family', 'Time', 'Clothes', 'Part Of Body', 'Animals',
+        listWords: ['Technologies', 'Sport', 'Nature', 'Family', 'Time', 'Clothes', 'Body', 'Animals',
           'Jobs', 'Education', 'Universe'
         ],
         category: '',
