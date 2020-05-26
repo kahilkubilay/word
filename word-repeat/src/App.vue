@@ -53,7 +53,8 @@
 </template>
 
 <script>
-  import menubar from './components/menubar';
+
+
 
   /*Burası request api ile birlestirilecek alan */
 
@@ -87,7 +88,7 @@
   export default {
     name: 'app',
     components: {
-      menubar,
+      // menubar,backgroundTemplate
     },
     data() {
       return {
