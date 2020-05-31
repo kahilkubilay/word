@@ -4,14 +4,13 @@
       <h2 class="msg">Word Speech</h2>
 
       <p class="countWord msg" v-bind="counterEffect()">
-        <span>{{ countWord }}</span>
+        <span>{{ wordsCapsule.countWord }}</span>
         <span>Words</span>
       </p>
 
       <button @click="gameArea()">Start</button>
 
       <div class="badge">
-
         <p class="badgeHeader">10 Badge</p>
 
         <ul>
@@ -19,6 +18,7 @@
             <img :src="getImagePath(badgeIcon)" :alt="badgeIcon + ' icon'">
           </li>
         </ul>
+
       </div>
     </div>
 
@@ -39,22 +39,18 @@
         </div>
       </div>
 
-      <p class="word"> {{ word }} </p>
+      <p class="word"> {{ wordsCapsule.word }} </p>
 
-      <input type="text" v-model="answer">
-
+      <input type="text" v-model="wordsCapsule.answer">
     </div>
 
-    <menubar v-show="!welcomeContainer" v-on:getChangeCategories="changeCategory"></menubar>
+    <menubar v-if="!welcomeContainer" v-on:getChangeCategories="changeCategory"></menubar>
 
   </div>
-
 
 </template>
 
 <script>
-
-
 
   /*Burası request api ile birlestirilecek alan */
 
@@ -84,28 +80,25 @@
 
   /*Burası request api ile birlestirilecek alan */
 
-
   export default {
     name: 'app',
-    components: {
-      // menubar,backgroundTemplate
-    },
     data() {
       return {
         welcomeContainer: true,
-        active: false,
-        countWord: 0,
-        options: ['option1', 'option2', 'option3', 'option4', 'option5', 'option6', 'option7', 'option8', 'option9'],
         badge: ['analyze', 'apple', 'billpaid', 'cube', 'diving', 'drums', 'education', 'spaceship',
           'statsincrease', 'tamburine'],
-        word: '',
-        answer: '',
-        wordCounter: 0,
-        words: wordList.technologies,
-        wordList: wordList,
-        log: '',
-        msg: '',
-        lengthOfWords: 0,
+        wordsCapsule: {
+          word: '',
+          answer: '',
+          countWord: 0,
+          wordCounter: 0,
+          words: wordList.technologies,
+          wordList: wordList,
+        },
+        logs: {
+          log: '',
+          msg: '',
+        }
       }
     },
     methods: {
@@ -114,12 +107,12 @@
         var vm = this;
 
         setTimeout(function () {
-          vm.countWord < totalWord ? vm.countWord++ : false;
+          vm.wordsCapsule.countWord < totalWord ? vm.wordsCapsule.countWord++ : false;
         }, 100);
       },
       gameArea() {
         this.welcomeContainer = false;
-        this.word = this.words[this.wordCounter];
+        this.wordsCapsule.word = this.wordsCapsule.words[this.wordsCapsule.wordCounter];
 
         this.startGame();
       },
@@ -128,36 +121,35 @@
 
         setInterval(function () {
 
-          if (vm.answer === vm.words[vm.wordCounter + 1]) {
-            vm.wordCounter += 2;
+          if (vm.wordsCapsule.answer === vm.wordsCapsule.words[vm.wordsCapsule.wordCounter + 1]) {
+            vm.wordsCapsule.wordCounter += 2;
 
-            vm.word = vm.words[vm.wordCounter];
-            vm.answer = '';
-            vm.log = 'dogru';
-            vm.progressBar(vm.wordCounter, 100);
+            vm.wordsCapsule.word = vm.wordsCapsule.words[vm.wordsCapsule.wordCounter];
+            vm.wordsCapsule.answer = '';
+            vm.logs.log = 'dogru';
+            vm.progressBar(vm.wordsCapsule.wordCounter, 100);
           }
 
         }, 500);
       },
       changeCategory(categoryName) {
-        this.words = wordList[categoryName];
-        this.word = this.words[0];
+        this.wordsCapsule.words = this.wordsCapsule.wordList[categoryName];
+        this.wordsCapsule.word = this.wordsCapsule.words[0];
       },
       getImagePath(iconPath) {
         return ('../src/assets/iconPackage/colored/' + iconPath + '-colored.png');
       },
       getLengthOfWords() {
         var toArrayWordList = Object.values(wordList);
-        var countWord = 0;
+        var wordLength = 0;
 
         toArrayWordList.forEach(function (wordListCategory) {
           wordListCategory.forEach(function () {
-            countWord++;
+            wordLength++;
           });
         });
 
-        return countWord;
-
+        return wordLength;
       },
       progressBar(progressVal, totalPercentageVal) {
         var strokeVal = (2 * totalPercentageVal) / totalPercentageVal;
@@ -168,10 +160,3 @@
   }
 
 </script>
-
-<style>
-  
-  @import url('https://fonts.googleapis.com/css2?family=Niramit&display=swap');
-  @import url('style/simpleStyle.css');
-
-</style>

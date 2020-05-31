@@ -1,60 +1,50 @@
 <template>
-
   <div class="shadowContainer">
+    
     <div id="menubar" class="fieldOptions">
       <ul>
-        <li v-for="category in listWords" v-bind:key="category" v-on:click="getCategory(category); addActiveClass($event);
-       "> {{ category }} </li>
+        <li v-for="category in listWords" v-bind:key="category" v-on:click="getCategory(category, $event)"> 
+          {{ category }} 
+        </li>
       </ul>
     </div>
 
     <!-- free template -->
     <div class="backgroundTemplate">
-      <img :src="'../../src/assets/' + category + '/background-1.png'" alt="">
-      <img :src="'../../src/assets/' + category + '/background-2.png'" alt="">
-      <img :src="'../../src/assets/' + category + '/background-3.png'" alt="">
+      <img v-for="image in 3" :src="'../../src/assets/' + category + '/background-' + image +'.png'" alt="">
     </div>
-
     <!-- free template -->
 
   </div>
-
 </template>
 
 <script>
   export default {
     name: 'menubar',
-    props: {
-      msg: String,
-    },
     data() {
       return {
         listWords: ['Technologies', 'Sport', 'Nature', 'Family', 'Time', 'Clothes', 'Body', 'Animals',
           'Jobs', 'Education', 'Universe', 'Life'
         ],
-        category: null,
-        path: '../../src/assets/nature/background-1',
+        category: null
       }
     },
     methods: {
-      getCategory(categoryName) {
+      getCategory(categoryName, event) {
+        (((document.querySelector('.active') || {}).classList || {})).length || 0 > 0 ? document
+          .querySelector('.active').classList.remove('active') : false;
+        
+        event.target.className += ' active';
         this.category = categoryName.toLowerCase();
         this.$emit('getChangeCategories', categoryName.toLowerCase());
       },
-      addActiveClass(event) {
-        (((document.querySelector('.active') || {}).classList || {})).length || 0 > 0 ?
-          document.querySelector('.active').classList.remove('active') : false;
-        event.target.className += ' active';
-      },
-    },
+    }
   }
 </script>
 
 <style scoped>
-  /*left menu*/
   .shadowContainer {
     width: 100%;
-    /* height: 100%; */
     height: 100%;
     position: absolute;
     top: 0;
@@ -98,10 +88,6 @@
     background-color: #639a67;
   }
 
-  /*left menu*/
-
-  /*free template */
-
   .backgroundTemplate {
     width: 100%;
     height: 100%;
@@ -127,5 +113,4 @@
     left: 10%;
   }
 
-  /*free template */
 </style>
